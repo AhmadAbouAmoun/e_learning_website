@@ -1,8 +1,12 @@
 import {useNavigate} from "react-router-dom";
 import Input from "../components/Input";
 import SignupButton from "../components/SignupButton";
+import {useState} from "react";
 
 const Signup = () => {
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
     return (
         <div>
