@@ -1,14 +1,14 @@
 import {useNavigate} from "react-router-dom";
 
-const SigninButton = ({name, password, email}) => {
+const SignupButton = ({name, password, email}) => {
     const navigate = useNavigate();
     return (
         <div>
             <button title="Sign In" type="button" className="sign-in_btn" onClick={() => navigate("/homePage")}>
-                <span>Sign In</span>
+                <span>Sign Up</span>
             </button>
             <p className="note">Terms of use &amp; Conditions</p>
         </div>
     );
 };
-export default SigninButton;
+export default SignupButton;

@@ -3,7 +3,6 @@ import Input from "../components/Input";
 import SignupButton from "../components/SignupButton";
 import {useState} from "react";
 import "../styles/form.css";
-import "../styles/style.css";
 
 const Signup = () => {
     const [name, setName] = useState("");
