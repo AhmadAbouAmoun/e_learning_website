@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-const Button = ({name, password, email, budget}) => {
+const SigninButton = ({name, password, email}) => {
     const navigate = useNavigate();
     return (
         <div>
@@ -11,4 +11,4 @@ const Button = ({name, password, email, budget}) => {
         </div>
     );
 };
-export default Button;
+export default SigninButton;
