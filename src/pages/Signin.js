@@ -4,10 +4,11 @@ import SiginButton from "../components/SigininButton";
 import "../styles/form.css";
 import {useNavigate} from "react-router-dom";
 import "../assets/logo.jpg";
+import SelectUser from "../components/SelectUser";
 const Signin = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [type, setType] = useState("");
+    const [usertype, setUserType] = useState("");
     const navigate = useNavigate();
     return (
         <div>
@@ -21,6 +22,7 @@ const Signin = () => {
                 </div>
                 <Input value="Email" input={email} setInput={setEmail} />
                 <Input value="Password" input={password} setInput={setPassword} />
+                <SelectUser type={usertype} setType={setUserType} />
                 <SiginButton email={email} password={password} />
                 <button
                     title="Sign In"
