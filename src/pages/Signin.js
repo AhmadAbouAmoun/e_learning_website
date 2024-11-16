@@ -7,6 +7,7 @@ import "../assets/logo.jpg";
 const Signin = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [type, setType] = useState("");
     const navigate = useNavigate();
     return (
         <div>
