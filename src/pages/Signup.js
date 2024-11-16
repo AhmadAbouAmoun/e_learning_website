@@ -20,9 +20,9 @@ const Signup = () => {
                         Get started with our app, just create an account and enjoy the experience.
                     </span>
                 </div>
-                <Input />
-                <Input />
-                <Input />
+                <Input value="Name" input={name} setInput={setName} />
+                <Input value="Name" input={email} setInput={setEmail} />
+                <Input value="Name" input={password} setInput={setPassword} />
                 <SignupButton />
                 <button
                     title="Sign In"
