@@ -21,9 +21,9 @@ const Signup = () => {
                     </span>
                 </div>
                 <Input value="Name" input={name} setInput={setName} />
-                <Input value="Name" input={email} setInput={setEmail} />
-                <Input value="Name" input={password} setInput={setPassword} />
-                <SignupButton />
+                <Input value="Email" input={email} setInput={setEmail} />
+                <Input value="Password" input={password} setInput={setPassword} />
+                <SignupButton name={name} email={email} password={password} />
                 <button
                     title="Sign In"
                     type="submit"
