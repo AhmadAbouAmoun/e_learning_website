@@ -29,7 +29,7 @@ const Signup = () => {
                     type="submit"
                     className="sign-in_btn"
                     onClick={() => {
-                        navigate("/login");
+                        navigate("/Signin");
                     }}
                 >
                     <span>Alreay have an account? Login</span>
