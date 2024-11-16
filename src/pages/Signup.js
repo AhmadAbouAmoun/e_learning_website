@@ -27,8 +27,7 @@ const Signup = () => {
                 <Input value="Email" input={email} setInput={setEmail} />
                 <Input value="Password" input={password} setInput={setPassword} />
                 <SelectUser type={usertype} setType={setUserType} />
-
-                <SignupButton name={name} email={email} password={password} />
+                <SignupButton name={name} email={email} password={password} type={usertype} />
                 <button
                     title="Sign In"
                     type="submit"

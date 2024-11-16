@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-const SiginButton = ({password, email}) => {
+const SiginButton = ({password, email, type}) => {
     const navigate = useNavigate();
     return (
         <div>
