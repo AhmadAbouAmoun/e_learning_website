@@ -1,7 +1,6 @@
 <?php
-
-$secret = 'MySecretKey';
 $header = ['alg' => 'HS256', 'typ' => 'JWT'];
+$secret = 'MySecretKey';
 
 
 function base64urlEncode($data) {
@@ -35,5 +34,6 @@ function getJWTValue($jwt, $key) {
 
     return isset($decodedPayload[$key]) ? $decodedPayload[$key] : null;
 }
+
 
 
