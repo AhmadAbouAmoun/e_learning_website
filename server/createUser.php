@@ -1,7 +1,6 @@
 <?php
 include "connection.php";
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+
 
 if(!$_POST["name"]||!$_POST["email"]||!$_POST["password"]||!$_POST["type"]){
 echo"something is not right";
@@ -11,6 +10,7 @@ $name=$_POST["name"];
 $email=$_POST["email"];
 $password=$_POST["password"];
 $type=$_POST["type"];
+$banned=false;
 
 $hash_password=password_hash($password,PASSWORD_DEFAULT);
 
@@ -23,12 +23,12 @@ if($result->num_rows>0){
     exit;
 }
 else{
-    $query=$connection->prepare("INSERT INTO $type(name,email,password) VALUES (?,?,?)");
+    $query=$connection->prepare("INSERT INTO $type(name,email,password,banned) VALUES (?,?,?,?)");
 if(!$query){
     echo"issue with the query ".$connection->error;
     exit;
 }
-$query->bind_param("sss", $name, $email, $hash_password);
+$query->bind_param("sssi", $name, $email, $hash_password,$banned);
 
 if($query->execute()){
     $user_id = $connection->insert_id;
@@ -38,7 +38,10 @@ if($query->execute()){
     echo json_encode($response);
 }
 else{
-    echo"Failed " . $query;
+    $response=[
+    "status" => "failed",
+    "message"=> "error ".$connection->error
+];
 }
 $query->close();
 $connection->close(); 
