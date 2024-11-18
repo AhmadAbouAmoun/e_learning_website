@@ -1,6 +1,8 @@
 <?php
 include "connection.php";
-
+include "JWT.php";
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
 
 if(!$_POST["name"]||!$_POST["email"]||!$_POST["password"]||!$_POST["type"]){
 echo"something is not right";
@@ -32,7 +34,9 @@ $query->bind_param("sssi", $name, $email, $hash_password,$banned);
 
 if($query->execute()){
     $user_id = $connection->insert_id;
-    $response=["id"=>$user_id,
+    $payload = ['user_id' => $user_id, 'type' => $type];
+    $jwt=createJWT($header,$payload,$secret);
+    $response=["token"=>$jwt,
     "status" => "success",
 ];
     echo json_encode($response);
