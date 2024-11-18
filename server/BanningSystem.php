@@ -3,21 +3,12 @@
 include "connection.php";
 include "JWT.php";
 
-if (isset($_POST['token'])) {
-    $token = $_POST['token'];
-    if(verifyJWT($token,$secret))
-    {
-        $id=getJWTValue($token,"user_id");
-        echo"$id";
-
-        $type=getJWTValue($token,"type");
-        echo"$type"."<br>";
-
+if(!$_POST["id"]||!$_POST["type"]){
+    echo"something is not right";
+    exit;
     }
-    else{
-        echo"error with token";
-        return;
-    }
+    $id=$_POST["id"];
+    $type=$_POST["type"];
     $banned=1;
     $query = $connection->prepare("UPDATE $type SET banned = ? WHERE id = ?");
     $query->bind_param('ii', $banned, $id);
@@ -33,6 +24,4 @@ if (isset($_POST['token'])) {
     } else {
         echo json_encode(["error" => "Failed to update user status"]);
     }
-} else {
-    echo json_encode(["error" => "Invalid request. token does not exist."]);
-}
+
