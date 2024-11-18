@@ -26,7 +26,7 @@ if($result->num_rows>0){
     $jwt=createJWT($header,$payload,$secret);
     $response=["token"=>$jwt,
     "status" => "success",
-    "redirectUrl" => ($type === 'admin') ? 'http://localhost/AIMovieRecommender/app/admin_panel.html' : 'http://localhost/AIMovieRecommender/app/index.html',
+    "redirectUrl" => ($type === 'admin') ? 'http://localhost/Admin_Panel' : 'http://localhost/HomePage',
 ];
         echo json_encode([
             $response
