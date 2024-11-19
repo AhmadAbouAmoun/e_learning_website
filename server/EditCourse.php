@@ -30,7 +30,7 @@ $query->bind_param("sii", $name,$teacher_id,$id);
 
 if($query->execute()){
 
-    $response=["course_id"=>$id,
+    $response=[
     "name"=>$name,
     "teacher_id"=>$teacher_id,
     "status" => "success",

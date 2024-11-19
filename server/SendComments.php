@@ -17,7 +17,28 @@ if (isset($_POST['token'])) {
     {
         $user_id=getJWTValue($token,"user_id");
         echo"$user_id";
-        $type=getJWTValue($token,"type");
-        echo"<br>"."$type"."<br>";		
+
+        $query=$connection->prepare("INSERT INTO comments(student_id,course_id,comment,type) VALUES (?,?,?,?)");
+        if(!$query){
+            echo"issue with the query ".$connection->error;
+            exit;
+        }
+        $query->bind_param("iiss",$user_id,$course_id,$comment,$type);
+        if($query->execute()){
+            $response=[
+                "comment"=>$comment,
+                "type"=>$type,
+                "course_id"=>$course_id,
+                "user_id"=>$user_id,
+                "status" => "success",
+            ];            
+            echo json_encode(["message"=>"successfully inserted message","status"=>"success",$response]);
+        }	
     }
+    else{
+        echo"a problem with th token";
+    }
+}
+else{
+    echo"token was not provided";
 }
