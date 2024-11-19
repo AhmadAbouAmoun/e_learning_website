@@ -20,7 +20,7 @@ if (isset($_POST['token'])) {
             echo"issue with the query ".$connection->error;
             exit;
         }
-        $query->bind_param("ii",$course_id,$user_id);
+        $query->bind_param("ii",$user_id,$course_id,);
         if($query->execute()){
             echo json_encode(["message"=>"successfully enrolled","status"=>"success"]);
         }
