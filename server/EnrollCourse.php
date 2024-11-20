@@ -2,37 +2,42 @@
 include "connection.php";
 include "JWT.php";
 
-if(!$_POST["course_id"]){
-    echo"cousre id was not provided";
+$input = json_decode(file_get_contents("php://input"), true);
+
+error_log(file_get_contents("php://input"));
+
+if (!isset($input['course_id'])) {
+    echo json_encode(["status" => "failed", "message" => "course_id is not set"]);
     return;
 }
-$course_id=$_POST["course_id"];
-if (isset($_POST['token'])) {
-    $token = $_POST['token'];
-    if(verifyJWT($token,$secret))
-    {
-        $user_id=getJWTValue($token,"user_id");
-        echo"$user_id";
-        $type=getJWTValue($token,"type");
-        echo"<br>"."$type"."<br>";		
-        $query=$connection->prepare("INSERT INTO enrolledcourses(student_id,course_id) VALUES (?,?)");
-        if(!$query){
-            echo"issue with the query ".$connection->error;
-            exit;
-        }
-        $query->bind_param("ii",$user_id,$course_id,);
-        if($query->execute()){
-            echo json_encode(["message"=>"successfully enrolled","status"=>"success"]);
-        }
-    }
-    else{
-        echo"error with token";
-        return;
-    }
 
-}
-else{
-    echo"token was not provided"."<br>";
+$course_id = $input["course_id"]; 
+if (!isset($input['token'])) {
+    echo json_encode(["status" => "failed", "message" => "Token was not provided"]);
     return;
+}
 
+$token = $input['token'];
+
+if (!verifyJWT($token, $secret)) {
+    echo json_encode(["status" => "failed", "message" => "Invalid or expired token"]);
+    return;
+}
+
+$user_id = getJWTValue($token, "user_id");
+$type = getJWTValue($token, "type");
+
+error_log("User ID: $user_id, Type: $type");
+
+$query = $connection->prepare("INSERT INTO enrolledcourses(student_id, course_id) VALUES (?, ?)");
+if (!$query) {
+    echo json_encode(["status" => "failed", "message" => "Query preparation failed", "error" => $connection->error]);
+    return;
+}
+
+$query->bind_param("ii", $user_id, $course_id);
+if ($query->execute()) {
+    echo json_encode(["status" => "success", "message" => "Successfully enrolled"]);
+} else {
+    echo json_encode(["status" => "failed", "message" => "Failed to enroll in course", "error" => $query->error]);
 }
