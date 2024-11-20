@@ -14,6 +14,52 @@ const Table = ({type}) => {
             console.error("Error fetching data:", error);
         });
     }, [type]);
+    const banUser = (id) => {
+        fetch(`http://localhost/e-learning-website/server/banUser.php`, {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": " http://localhost:3000",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id,
+                type,
+            }),
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.message) {
+                alert("User banned successfully");
+                setData((prevData) => prevData.map((item) => (item.id === id ? {...item, banned: true} : item)));
+            } else if (result.error) {
+                alert(result.error);
+            }
+        })
+        .catch((error) => {
+            console.error("Error banning user:", error);
+        });
+    };
+    const deleteCourse = (id) => {
+        fetch(`http://localhost/e-learning-website/server/deleteCourse.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: id,
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.message) {
+                alert(result.message);
+                setData((prevData) => prevData.filter((course) => course.id !== id));
+            } else if (result.status === "failed") {
+                alert(result.message);
+            }
+        })
+        .catch((error) => {
+            console.error("Error deleting course:", error);
+        });
+    };
 
     return type === "Courses" ? (
         <section className={classes.dataTable}>
@@ -34,7 +80,7 @@ const Table = ({type}) => {
                             <td>{course.id}</td>
                             <td>{course.teacher_id}</td>
                             <td>
-                                <button>Delete</button>
+                                <button onClick={() => deleteCourse(course.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -63,7 +109,9 @@ const Table = ({type}) => {
                             <td>{user.email}</td>
                             <td>{user.banned ? "Yes" : "No"}</td>
                             <td>
-                                <button>{user.banned ? "Unban" : "Ban"}</button>
+                                <button onClick={() => banUser()} disabled={user.banned}>
+                                    {user.banned ? "Unban" : "Ban"}
+                                </button>
                             </td>
                             <td>
                                 <button>Delete</button>

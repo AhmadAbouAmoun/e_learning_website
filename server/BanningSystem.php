@@ -2,6 +2,9 @@
 
 include "connection.php";
 include "JWT.php";
+header("Access-Control-Allow-Origin: http://localhost:3000");
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS, REQUEST");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 if(!$_POST["id"]||!$_POST["type"]){
     echo"something is not right";
@@ -16,12 +19,12 @@ if(!$_POST["id"]||!$_POST["type"]){
     if ($query->execute()) {
         if($query->affected_rows > 0)
         {
-            echo json_encode(["message" => "User status updated successfully"]);
+            echo json_encode(["message" => " status updated successfully"]);
         }
         else{
             echo"record does not exist ".$connection->error;
         }
     } else {
-        echo json_encode(["error" => "Failed to update user status"]);
+        echo json_encode(["error" => "Failed to update  status"]);
     }
 
