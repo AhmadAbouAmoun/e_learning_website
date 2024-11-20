@@ -3,13 +3,18 @@
 include "connection.php";
 include "JWT.php";
 
-    if(!isset($_POST['id'])||!isset($_POST['type'])){
-        echo"id or type are not set";
-        return;
-    }
-    $id=$_POST['id'];
-    $type=$_POST['type'];
 
+$input = json_decode(file_get_contents("php://input"), true);
+error_log(file_get_contents("php://input"));
+
+if(!isset($input["type"]) || !isset($input["id"])){
+    echo $input["type"];
+    echo  $input["id"] ;
+    return;
+    exit;
+}
+    $id=$input["id"];
+    $type=$input["type"];
     //here starts the part related to the deletion of the student
 
     if($type=="student"){
@@ -17,7 +22,6 @@ include "JWT.php";
         $deleteEnroll->bind_param('i', $id);
 
         if ($deleteEnroll->execute()) {
-            if($deleteEnroll->affected_rows > 0){
 
                 $query = $connection->prepare("DELETE  FROM $type WHERE id = ?");
                 $query->bind_param('i', $id);
@@ -33,10 +37,7 @@ include "JWT.php";
                 } else {
                     echo json_encode(["error" => "Failed to update students status"]);
                 }
-            }
-            else{
-                echo"enrolled did not change anything";
-            }
+
         }
         else{
             echo"enrolled did not excute";

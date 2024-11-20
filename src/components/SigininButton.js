@@ -26,8 +26,13 @@ const SiginButton = ({password, email, type}) => {
 
                         if (data) {
                             if (data.status === "success") {
+                                console.log(data);
+
                                 localStorage.setItem("token", data.token);
-                                navigate("/homePage");
+                                if (data.redirectUrl === "homePage") navigate(`/homePage`);
+                                else {
+                                    navigate(`/adminPanel`);
+                                }
                             }
                         } else {
                             console.error(data.message);

@@ -10,7 +10,6 @@ const AdminPanel = () => {
         password: "",
     });
 
-    // Function to handle input changes
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setTeacherData((prevData) => ({
@@ -51,9 +50,9 @@ const AdminPanel = () => {
     return (
         <main className={classes.dataPanel}>
             <h1>Data Panel</h1>
-            <Table type="Students" />
+            <Table type="Students" input="student" />
 
-            <Table type="Teachers" />
+            <Table type="Teachers" input="teacher" />
 
             <button onClick={() => setShowCreateForm(true)}>Create Teacher</button>
 

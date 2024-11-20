@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import classes from "../styles/tableDesgin.module.css";
 
-const Table = ({type}) => {
+const Table = ({type, input}) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -19,12 +19,11 @@ const Table = ({type}) => {
         fetch(`http://localhost/e-learning-website/server/BanningSystem.php`, {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin": " http://localhost:3000",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 id,
-                type,
+                type: input,
             }),
         })
         .then((response) => response.json())
@@ -63,7 +62,7 @@ const Table = ({type}) => {
         });
     };
     //////////
-    const deleteUser = (id, type) => {
+    const deleteUser = (id) => {
         fetch(`http://localhost/e-learning-website/server/DeletingUser.php`, {
             method: "POST",
             headers: {
@@ -71,7 +70,7 @@ const Table = ({type}) => {
             },
             body: JSON.stringify({
                 id,
-                type,
+                type: input,
             }),
         })
         .then((response) => response.json())
@@ -146,7 +145,7 @@ const Table = ({type}) => {
                             <td>{user.id}</td>
                             <td>{user.email}</td>
                             <td>{user.banned ? "Yes" : "No"}</td>
-                            <td onClick={() => banUser()} disabled={user.banned}>
+                            <td onClick={() => banUser(user.id)} disabled={user.banned}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="20"
@@ -163,7 +162,7 @@ const Table = ({type}) => {
                                     <path d="m4.9 4.9 14.2 14.2" />
                                 </svg>
                             </td>
-                            <td onClick={() => deleteUser(user.id, type)}>
+                            <td onClick={() => deleteUser(user.id)}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="20"

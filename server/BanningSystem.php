@@ -3,16 +3,21 @@
 include "connection.php";
 include "JWT.php";
 header("Access-Control-Allow-Origin: http://localhost:3000");
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS, REQUEST");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS, REQUEST");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-if(!$_POST["id"]||!$_POST["type"]){
-    echo"something is not right";
+$input = json_decode(file_get_contents("php://input"), true);
+error_log(file_get_contents("php://input"));
+
+if(!isset($input["type"]) || !isset($input["id"])){
+    echo $input["type"];
+    echo  $input["id"] ;
+    return;
     exit;
-    }
-    $id=$_POST["id"];
-    $type=$_POST["type"];
-    $banned=1;
+}
+    $id=$input["id"];
+    $type=$input["type"];
+    $banned=true;
     $query = $connection->prepare("UPDATE $type SET banned = ? WHERE id = ?");
     $query->bind_param('ii', $banned, $id);
 

@@ -27,15 +27,13 @@ if($result->num_rows>0){
         echo json_encode(["status" => "failed","error" => "Your account has been banned"]);
         return;
     }
-    echo json_encode([
-        $user
-    ]);
+
     if(password_verify( $password,$user['password'])){
         $payload = ['user_id' => $user['id'], 'type' => $type];
     $jwt=createJWT($header,$payload,$secret);
     $response=["token"=>$jwt,
     "status" => "success",
-    "redirectUrl" => ($type === 'admin') ? 'http://localhost/Admin_Panel' : 'http://localhost/HomePage',
+    "redirectUrl" => ($type === 'admin') ? 'adminPanel' : 'homePage',
 ];
         echo json_encode([
             $response
