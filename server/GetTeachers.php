@@ -2,11 +2,8 @@
 
 include "connection.php";
 
-if(!$_POST["type"]){
-    echo json_encode(["message"=>"something is not right"]);
-    exit;
-    }
-$type=$_POST["type"];
+
+$type="teacher";
 
 $query = $connection->prepare("SELECT * FROM $type");
 $query->execute();
