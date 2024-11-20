@@ -14,8 +14,9 @@ const Table = ({type}) => {
             console.error("Error fetching data:", error);
         });
     }, [type]);
+    ////////
     const banUser = (id) => {
-        fetch(`http://localhost/e-learning-website/server/banUser.php`, {
+        fetch(`http://localhost/e-learning-website/server/BanningSystem.php`, {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin": " http://localhost:3000",
@@ -39,8 +40,9 @@ const Table = ({type}) => {
             console.error("Error banning user:", error);
         });
     };
+    ///////
     const deleteCourse = (id) => {
-        fetch(`http://localhost/e-learning-website/server/deleteCourse.php`, {
+        fetch(`http://localhost/e-learning-website/server/DeleteCourse.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -60,8 +62,9 @@ const Table = ({type}) => {
             console.error("Error deleting course:", error);
         });
     };
+    //////////
     const deleteUser = (id, type) => {
-        fetch(`http://localhost/e-learning-website/server/deleteUser.php`, {
+        fetch(`http://localhost/e-learning-website/server/DeletingUser.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
