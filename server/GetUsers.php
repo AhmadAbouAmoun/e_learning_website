@@ -3,7 +3,7 @@
 include "connection.php";
 
 if(!$_POST["type"]){
-    echo"something is not right";
+    echo json_encode(["message"=>"something is not right"]);
     exit;
     }
 $type=$_POST["type"];

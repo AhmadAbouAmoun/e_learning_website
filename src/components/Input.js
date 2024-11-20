@@ -13,6 +13,7 @@ const Input = ({value, input, setInput}) => {
                 required
                 onChange={(e) => {
                     setInput((input = e.target.value));
+                    console.log(input);
                 }}
             />
         </div>

@@ -7,7 +7,7 @@ if(!$_POST["email"]||!$_POST["password"]||!$_POST["type"]){
     exit;
 }
 $email=$_POST["email"];
-$password=$_POST["password"];
+$password = trim($_POST["password"]);
 $type=$_POST["type"];
 $check=$connection->prepare("SELECT * FROM $type WHERE email=?");
 $check->bind_param("s",  $email);
@@ -21,7 +21,10 @@ if($result->num_rows>0){
         echo json_encode(["error" => "Your account has been banned"]);
         return;
     }
-    if(password_verify($password, $user['password'])){
+    echo json_encode([
+        $user
+    ]);
+    if(password_verify( $password,$user['password'])){
         $payload = ['user_id' => $user['id'], 'type' => $type];
     $jwt=createJWT($header,$payload,$secret);
     $response=["token"=>$jwt,
@@ -35,4 +38,7 @@ if($result->num_rows>0){
         http_response_code(401); 
         echo json_encode(["error" => "Invalid password!"]);
     }
+}
+else{
+    echo"no row was found";
 }
