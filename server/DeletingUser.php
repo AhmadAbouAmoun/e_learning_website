@@ -3,12 +3,12 @@
 include "connection.php";
 include "JWT.php";
 
-    if(!isset($_GET['id'])||!isset($_GET['type'])){
+    if(!isset($_POST['id'])||!isset($_POST['type'])){
         echo"id or type are not set";
         return;
     }
-    $id=$_GET['id'];
-    $type=$_GET['type'];
+    $id=$_POST['id'];
+    $type=$_POST['type'];
 
     //here starts the part related to the deletion of the student
 

@@ -60,6 +60,30 @@ const Table = ({type}) => {
             console.error("Error deleting course:", error);
         });
     };
+    const deleteUser = (id, type) => {
+        fetch(`http://localhost/e-learning-website/server/deleteUser.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id,
+                type,
+            }),
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.message) {
+                alert(result.message);
+                setData((prevData) => prevData.filter((item) => item.id !== id)); // Remove the deleted user from the UI
+            } else if (result.error) {
+                alert(result.error);
+            }
+        })
+        .catch((error) => {
+            console.error("Error deleting user:", error);
+        });
+    };
 
     return type === "Courses" ? (
         <section className={classes.dataTable}>
@@ -114,7 +138,7 @@ const Table = ({type}) => {
                                 </button>
                             </td>
                             <td>
-                                <button>Delete</button>
+                                <button onClick={() => deleteUser(user.id, type)}>Delete</button>
                             </td>
                         </tr>
                     ))}
