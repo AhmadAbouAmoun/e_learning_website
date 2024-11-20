@@ -9,7 +9,6 @@ const Signup = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [usertype, setUserType] = useState("");
     const navigate = useNavigate();
     return (
         <div>
@@ -26,8 +25,7 @@ const Signup = () => {
                 <Input value="Name" input={name} setInput={setName} />
                 <Input value="Email" input={email} setInput={setEmail} />
                 <Input value="Password" input={password} setInput={setPassword} />
-                <SelectUser type={usertype} setType={setUserType} />
-                <SignupButton name={name} email={email} password={password} type={usertype} />
+                <SignupButton name={name} email={email} password={password} />
                 <button
                     title="Sign In"
                     type="submit"

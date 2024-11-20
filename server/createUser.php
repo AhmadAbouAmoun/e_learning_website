@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 $input = json_decode(file_get_contents("php://input"), true);
 error_log(file_get_contents("php://input"));
 
-if (!isset($input["name"]) || !isset($input["email"]) || !isset($input["password"]) || !isset($input["type"])) {
+if (!isset($input["name"]) || !isset($input["email"]) || !isset($input["password"]) ) {
     echo json_encode(["status" => "failed", "message" => "Missing required fields"]);
     exit;
 }
@@ -18,7 +18,7 @@ if (!isset($input["name"]) || !isset($input["email"]) || !isset($input["password
 $name = $input["name"];
 $email = $input["email"];
 $password = $input["password"];
-$type = $input["type"];
+$type = "student";
 $banned = 0; 
 
 

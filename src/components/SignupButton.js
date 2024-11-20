@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-const SignupButton = ({name, password, email, type}) => {
+const SignupButton = ({name, password, email}) => {
     const navigate = useNavigate();
 
     return (
@@ -19,7 +19,6 @@ const SignupButton = ({name, password, email, type}) => {
                             body: JSON.stringify({
                                 name: name,
                                 password: password,
-                                type: type,
                                 email: email,
                             }),
                         });
