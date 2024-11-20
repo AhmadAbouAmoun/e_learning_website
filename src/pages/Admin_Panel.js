@@ -2,6 +2,23 @@ import {useEffect} from "react";
 import classes from "../styles/tableDesgin.module.css";
 
 const AdminPanel = () => {
+    useEffect(() => {
+        fetch("http://localhost/e-learning-website/server/GetStudents.php", {method: "GET"})
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
+        fetch("http://localhost/e-learning-website/server/GetTeachers.php", {method: "GET"})
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
+        fetch("http://localhost/e-learning-website/server/GetCourses.php", {method: "GET"})
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
+    }, []);
     return (
         <main className={classes.dataPanel}>
             <h1>Data Panel</h1>
