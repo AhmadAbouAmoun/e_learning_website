@@ -3,18 +3,18 @@ import Input from "../components/Input";
 import SignupButton from "../components/SignupButton";
 import {useState} from "react";
 import "../styles/form.css";
-import SelectUser from "../components/SelectUser";
-
+import logo from "../assets/logo.jpg";
 const Signup = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    console.log(logo);
     return (
         <div>
             <form id="signupForm" class="form_container">
                 <div className="logo_container">
-                    <img src="logo.png" alt="" />
+                    <img src={logo} alt="" />
                 </div>
                 <div className="title_container">
                     <p className="title">Create new Account</p>

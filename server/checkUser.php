@@ -2,13 +2,19 @@
 include "connection.php";
 include "JWT.php";
 
-if(!$_POST["email"]||!$_POST["password"]||!$_POST["type"]){
-    echo"something is not right";
+$input = json_decode(file_get_contents("php://input"), true);
+error_log(file_get_contents("php://input"));
+
+if(!isset($input["type"]) || !isset($input["email"]) || !isset($input["password"])){
+    echo $input["type"];
+    echo  $input["email"] ;
+    echo $input["password"];
+    return;
     exit;
 }
-$email=$_POST["email"];
-$password = trim($_POST["password"]);
-$type=$_POST["type"];
+$type = $input["type"];
+$email = $input["email"];
+$password = $input["password"];
 $check=$connection->prepare("SELECT * FROM $type WHERE email=?");
 $check->bind_param("s",  $email);
 $check->execute();
@@ -18,7 +24,7 @@ if($result->num_rows>0){
 
     if ($user['banned']) {
         http_response_code(403);
-        echo json_encode(["error" => "Your account has been banned"]);
+        echo json_encode(["status" => "failed","error" => "Your account has been banned"]);
         return;
     }
     echo json_encode([

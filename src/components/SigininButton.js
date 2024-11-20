@@ -8,22 +8,34 @@ const SiginButton = ({password, email, type}) => {
                 title="Sign In"
                 type="button"
                 className="sign-in_btn"
-                onClick={() =>
-                    fetch("http://localhost/e-learning-website/server/checkUser.php", {
-                        method: "POST",
-                        body: {
-                            password: password,
-                            type: type,
-                            email: email,
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        localStorage.setItem("token", data.token);
-                        navigate("/homePage");
-                    })
-                    .catch((e) => console.log(e))
-                }
+                onClick={async () => {
+                    try {
+                        const response = await fetch("http://localhost/e-learning-website/server/checkUser.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                type: type,
+                                password: password,
+                                email: email,
+                            }),
+                        });
+
+                        const data = await response.json();
+
+                        if (data) {
+                            if (data.status === "success") {
+                                localStorage.setItem("token", data.token);
+                                navigate("/homePage");
+                            }
+                        } else {
+                            console.error(data.message);
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
+                    }
+                }}
             >
                 <span>Sign In</span>
             </button>
