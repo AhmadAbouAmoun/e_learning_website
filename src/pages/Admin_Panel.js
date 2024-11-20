@@ -8,6 +8,7 @@ const AdminPanel = () => {
             <h1>Data Panel</h1>
             <Table type="Students" />
             <Table type="Teachers" />
+            <button> Create Teacher </button>
             <Table type="Courses" />
         </main>
     );

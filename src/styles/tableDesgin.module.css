@@ -1,3 +1,13 @@
+body {
+    text-align: center;
+}
+.dataPanel > button {
+    background-color: Green;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
 .dataPanel {
     color: green;
     padding: 20px;

@@ -103,8 +103,19 @@ const Table = ({type}) => {
                             <td>{course.name}</td>
                             <td>{course.id}</td>
                             <td>{course.teacher_id}</td>
-                            <td>
-                                <button onClick={() => deleteCourse(course.id)}>Delete</button>
+                            <td onClick={() => deleteCourse(course.id)}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    stroke="#c40808"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
                             </td>
                         </tr>
                     ))}
@@ -132,13 +143,36 @@ const Table = ({type}) => {
                             <td>{user.id}</td>
                             <td>{user.email}</td>
                             <td>{user.banned ? "Yes" : "No"}</td>
-                            <td>
-                                <button onClick={() => banUser()} disabled={user.banned}>
-                                    {user.banned ? "Unban" : "Ban"}
-                                </button>
+                            <td onClick={() => banUser()} disabled={user.banned}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#c40808"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-ban"
+                                >
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="m4.9 4.9 14.2 14.2" />
+                                </svg>
                             </td>
-                            <td>
-                                <button onClick={() => deleteUser(user.id, type)}>Delete</button>
+                            <td onClick={() => deleteUser(user.id, type)}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    stroke="#c40808"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
                             </td>
                         </tr>
                     ))}
