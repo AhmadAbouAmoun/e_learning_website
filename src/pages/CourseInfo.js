@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useParams} from "react-router-dom";
 import Announcments from "../components/Announcments";
 import Assignments from "../components/Assignments";
+import CommentSection from "../components/commentSection";
 
 const CourseInfo = () => {
     const {id} = useParams();
@@ -10,6 +11,7 @@ const CourseInfo = () => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto"}}>
+            <CommentSection />
             <div style={{width: "75%", padding: "20px"}}>
                 <nav className="navbar">
                     <h3>Website Name</h3>
