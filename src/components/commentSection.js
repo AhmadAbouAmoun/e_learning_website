@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 const CommentSection = ({id}) => {
     const [pub, setPub] = useState();
     const [pri, setPri] = useState();
+    const [announcment, setAnnouncment] = useState();
     const [pubComments, setPubComments] = useState([]);
     const [priComments, setPriComments] = useState([]);
     const [flag, setFlag] = useState(true);
@@ -61,6 +62,7 @@ const CommentSection = ({id}) => {
             console.error("Error posting comment:", error);
         });
     }
+    function CreateAnnouncment() {}
     return (
         <div style={{width: "20%", padding: "20px", borderRight: "2px solid #ccc", backgroundColor: "#f9f9f9"}}>
             <h3>Comments</h3>
