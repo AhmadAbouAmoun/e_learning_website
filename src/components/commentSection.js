@@ -27,28 +27,23 @@ const CommentSection = ({id}) => {
         .catch((error) => {
             console.error("Error posting comment:", error);
         });
-    }, [flag]);
+    }, []);
 
     useEffect(() => {
-        fetch(`http://localhost/e-learning-website/server/GetPrivateComments.php`, {
+        fetch("http://localhost/e-learning-website/server/GetPrivateComments.php", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 course_id: id,
-                token,
+                token: localStorage.getItem("token"),
             }),
         })
         .then((response) => response.json())
-        .then((data) => {
-            if (Array.isArray(data)) {
-                setPubComments((pubComments) => (pubComments = data));
-                console.log(pubComments);
-            }
-        })
-        .catch((error) => {
-            console.error("Error posting comment:", error);
-        });
-    }, [flag]);
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
+    }, []);
 
     function CreateComment(type, comment) {
         fetch(`http://localhost/e-learning-website/server/SendComments.php`, {
