@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 const CommentSection = ({id}) => {
     const [pub, setPub] = useState();
     const [pri, setPri] = useState();
+    const [invitation, setInvitation] = useState();
     const [announcment, setAnnouncment] = useState();
     const [pubComments, setPubComments] = useState([]);
     const [priComments, setPriComments] = useState([]);
@@ -121,7 +122,7 @@ const CommentSection = ({id}) => {
                 </div>
             </div>
             <textarea
-                placeholder="Add a public comment"
+                placeholder="Add  an announcment"
                 style={{width: "100%", marginBottom: "10px", height: "80px"}}
                 onChange={(e) => {
                     setAnnouncment(e.target.value);
