@@ -1,11 +1,10 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import classes from "../styles/tableDesgin.module.css";
 import Table from "../components/Table";
 
 const AdminPanel = () => {
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [showCreateCourseForm, setShowCreateCourseForm] = useState(false);
-
     const [teacherData, setTeacherData] = useState({
         name: "",
         email: "",
@@ -32,6 +31,25 @@ const AdminPanel = () => {
             [name]: value,
         }));
     };
+    console.log(localStorage.getItem("token"));
+    useEffect(() => {
+        fetch(`http://localhost/e-learning-website/server/CheckAdmin.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+        });
+    }, []);
 
     const handleTeacherFormSubmit = (e) => {
         e.preventDefault();

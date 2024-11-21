@@ -22,6 +22,8 @@ $type = getJWTValue($token, "type");
 if($type=="admin"){
     $response=["status"=>"success"];
 }
+
 else{
     $response=["status"=>"failed"];
 }
+echo json_encode($response);
