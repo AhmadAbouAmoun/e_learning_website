@@ -21,6 +21,27 @@ const Announcments = ({id}) => {
             console.error("Error fetching data:", error);
         });
     }, []);
-    return;
+    let i = 0;
+    return (
+        <div style={{padding: "20px"}}>
+            {ann.map((element) => (
+                <div
+                    key={i}
+                    style={{
+                        border: "1px solid #ccc",
+                        borderRadius: "8px",
+                        padding: "16px",
+                        marginBottom: "12px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        backgroundColor: "#f9f9f9",
+                    }}
+                >
+                    <h3 style={{margin: 0}}>Announcment: {element.announcment}</h3>
+                </div>
+            ))}
+        </div>
+    );
 };
 export default Announcments;

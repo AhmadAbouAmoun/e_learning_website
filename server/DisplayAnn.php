@@ -10,6 +10,8 @@ if ( !isset($input["course_id"])  ) {
     echo json_encode(["status" => "failed", "message" => "Missing required fields"]);
     exit;
 }
+	
+
 
 $course_id = $input["course_id"];
 
