@@ -2,8 +2,10 @@ import {useState} from "react";
 import Courses from "../components/Courses";
 import "../styles/navbar.css";
 import EnrolledCourses from "../components/EnrolledCourses";
+import {Route, Routes, useNavigate} from "react-router-dom";
+import CourseInfo from "./CourseInfo";
 const HomePage = () => {
-    const [page, setPage] = useState("Courses");
+    const navigate = useNavigate();
     return (
         <div>
             <nav className="navbar">
@@ -12,31 +14,29 @@ const HomePage = () => {
                 <ul>
                     <li
                         onClick={() => {
-                            setPage("Courses");
+                            navigate("Courses");
                         }}
                     >
                         Courses{" "}
                     </li>
                     <li
                         onClick={() => {
-                            setPage("Enrolled");
+                            navigate("Enrolled");
                         }}
                     >
                         Enrolled Courses
                     </li>
-                    <li
-                        onClick={() => {
-                            setPage("Invitations");
-                        }}
-                    >
-                        Invitations
-                    </li>
+                    <li onClick={() => {}}>Invitations</li>
                 </ul>
 
                 <span>Welcome</span>
             </nav>
-            {page === "Courses" && <Courses />}
-            {page === "Enrolled" && <EnrolledCourses />}
+            <Routes>
+                <Route path="Courses" element={<Courses />} />
+                <Route path="Enrolled/*" element={<EnrolledCourses />}>
+                    <Route path="course-info/:id" element={<CourseInfo />} />
+                </Route>
+            </Routes>
         </div>
     );
 };
