@@ -103,6 +103,14 @@ const CommentSection = ({id}) => {
                     <p></p>
                 </div>
             </div>
+            <textarea
+                placeholder="Add a public comment"
+                style={{width: "100%", marginBottom: "10px", height: "80px"}}
+                onChange={(e) => {
+                    setAnnouncment(e.target.value);
+                    console.log(announcment);
+                }}
+            />
             <button style={{width: "100%"}} onClick={() => CreateComment("private", pri)}>
                 {" "}
                 Post Announcment{" "}
