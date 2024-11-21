@@ -108,7 +108,6 @@ const CommentSection = ({id}) => {
                 style={{width: "100%", marginBottom: "10px", height: "80px"}}
                 onChange={(e) => {
                     setAnnouncment(e.target.value);
-                    console.log(announcment);
                 }}
             />
             <button style={{width: "100%"}} onClick={() => CreateComment("private", pri)}>
