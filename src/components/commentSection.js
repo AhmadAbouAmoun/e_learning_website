@@ -101,6 +101,10 @@ const CommentSection = ({id}) => {
                     <p></p>
                 </div>
             </div>
+            <button style={{width: "100%"}} onClick={() => CreateComment("private", pri)}>
+                {" "}
+                Post Announcment{" "}
+            </button>
         </div>
     );
 };

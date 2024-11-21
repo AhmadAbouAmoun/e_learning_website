@@ -3,7 +3,6 @@ include "connection.php";
 include "JWT.php";
 
 $input = json_decode(file_get_contents("php://input"), true);
-
 if ( !isset($input["title"]) || !isset($input["description"]) || !isset($input["course_id"])) {
     echo json_encode(["status" => "failed", "message" => "Missing required fields"]);
     return;

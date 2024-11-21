@@ -12,12 +12,12 @@ const Assignments = ({course_id}) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
+            body: {
                 title: title,
                 description: description,
                 course_id: course_id,
                 token,
-            }),
+            },
         })
         .then((response) => response.json())
         .then((data) => {
