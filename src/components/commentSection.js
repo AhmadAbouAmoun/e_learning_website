@@ -3,6 +3,9 @@ import {useState} from "react";
 const CommentSection = ({id}) => {
     const [pub, setPub] = useState();
     const [pri, setPri] = useState();
+    const [pubComments, setPubComments] = useState([]);
+    const [priComments, setPriComments] = useState([]);
+
     const token = localStorage.getItem("token");
     console.log(token);
 
@@ -38,7 +41,9 @@ const CommentSection = ({id}) => {
                         setPub(e.target.value);
                     }}
                 />
-                <button style={{width: "100%"}}>Post Public Comment</button>
+                <button style={{width: "100%"}} onClick={() => CreateComment("public", pub)}>
+                    Post Public Comment
+                </button>
                 <div style={{marginTop: "20px"}}>
                     <p>
                         <strong>John:</strong> Hello world
