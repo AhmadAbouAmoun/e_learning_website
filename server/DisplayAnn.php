@@ -12,7 +12,6 @@ if ( !isset($input["course_id"])  ) {
 }
 	
 
-
 $course_id = $input["course_id"];
 
 $query = $connection->prepare("SELECT * FROM announcments WHERE course_id=?");
