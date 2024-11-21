@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useParams} from "react-router-dom";
+import Announcments from "../components/Announcments";
 
 const CourseInfo = () => {
     const {id} = useParams();
@@ -18,6 +19,7 @@ const CourseInfo = () => {
 
                 <span>Welcome</span>
             </nav>
+            {path === "Announcments" && <Announcments id={id} />}
         </div>
     );
 };

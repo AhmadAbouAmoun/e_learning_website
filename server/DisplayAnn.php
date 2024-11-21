@@ -2,13 +2,16 @@
 
 include "connection.php";
 
-if ( !isset($_POST["course_id"])  ) {
+$input = json_decode(file_get_contents("php://input"), true);
+error_log(file_get_contents("php://input"));
+
+if ( !isset($input["course_id"])  ) {
     
     echo json_encode(["status" => "failed", "message" => "Missing required fields"]);
     exit;
 }
 
-$course_id = $_POST["course_id"];
+$course_id = $input["course_id"];
 
 $query = $connection->prepare("SELECT * FROM announcments WHERE course_id=?");
 $query->bind_param("i",$course_id);
