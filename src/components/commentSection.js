@@ -5,7 +5,7 @@ const CommentSection = ({id}) => {
     const [pri, setPri] = useState();
     const [pubComments, setPubComments] = useState([]);
     const [priComments, setPriComments] = useState([]);
-
+    const [flag, setFlag] = useState(true);
     const token = localStorage.getItem("token");
 
     useEffect(() => {
@@ -14,6 +14,7 @@ const CommentSection = ({id}) => {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 course_id: id,
+                token,
             }),
         })
         .then((response) => response.json())
@@ -26,7 +27,28 @@ const CommentSection = ({id}) => {
         .catch((error) => {
             console.error("Error posting comment:", error);
         });
-    }, []);
+    }, [flag]);
+
+    useEffect(() => {
+        fetch(`http://localhost/e-learning-website/server/GetPrivateComments.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                course_id: id,
+                token,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (Array.isArray(data)) {
+                setPubComments((pubComments) => (pubComments = data));
+                console.log(pubComments);
+            }
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
+    }, [flag]);
 
     function CreateComment(type, comment) {
         fetch(`http://localhost/e-learning-website/server/SendComments.php`, {
@@ -40,9 +62,7 @@ const CommentSection = ({id}) => {
             }),
         })
         .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
+        .then((data) => {})
         .catch((error) => {
             console.error("Error posting comment:", error);
         });

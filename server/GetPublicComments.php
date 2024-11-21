@@ -10,6 +10,7 @@ if(!$input["course_id"]){
 }
 $course_id=$input["course_id"];
 
+
 $type="public";
 
 

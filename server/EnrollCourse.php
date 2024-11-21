@@ -47,7 +47,7 @@ if (!$query) {
     return;
 }
 
-$query->bind_param("iisi", $user_id, $course_id,$course_name,$teacher_id);
+$query->bind_param("iisi", $user_id, $course_id,$course_name,$course_id);
 if ($query->execute()) {
     echo json_encode(["status" => "success", "message" => "Successfully enrolled"]);
 } else {
