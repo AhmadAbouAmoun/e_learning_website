@@ -62,7 +62,24 @@ const CommentSection = ({id}) => {
             console.error("Error posting comment:", error);
         });
     }
-    function CreateAnnouncment() {}
+    function CreateAnnouncment() {
+        fetch(`http://localhost/e-learning-website/server/PostAnncouncment.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                course_id: id,
+                token,
+                announcment,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
+    }
     return (
         <div style={{width: "20%", padding: "20px", borderRight: "2px solid #ccc", backgroundColor: "#f9f9f9"}}>
             <h3>Comments</h3>
@@ -110,7 +127,7 @@ const CommentSection = ({id}) => {
                     setAnnouncment(e.target.value);
                 }}
             />
-            <button style={{width: "100%"}} onClick={() => CreateComment("private", pri)}>
+            <button style={{width: "100%"}} onClick={() => CreateAnnouncment()}>
                 {" "}
                 Post Announcment{" "}
             </button>
