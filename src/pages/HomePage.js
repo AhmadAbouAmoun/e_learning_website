@@ -1,5 +1,7 @@
 import {useState} from "react";
 import Courses from "../components/Courses";
+import Invitation from "../components/Invitation";
+
 import "../styles/navbar.css";
 import EnrolledCourses from "../components/EnrolledCourses";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
@@ -49,7 +51,7 @@ const HomePage = () => {
                 <Route path="Enrolled/*" element={<EnrolledCourses />}>
                     <Route path="course-info/:id" element={<CourseInfo />} />
                 </Route>
-                <Route path="Invitation" element={<Courses />} />
+                <Route path="Invitation" element={<Invitation />} />
             </Routes>
         </>
     );
