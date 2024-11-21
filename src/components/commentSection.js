@@ -1,12 +1,22 @@
+import {useState} from "react";
+
 const CommentSection = () => {
+    const [pub, setPub] = useState();
+    const [pri, setPri] = useState();
+
     return (
         <div style={{width: "20%", padding: "20px", borderRight: "2px solid #ccc", backgroundColor: "#f9f9f9"}}>
             <h3>Comments</h3>
             <h3>Public Comments</h3>
+
             <div>
                 <textarea
                     placeholder="Add a public comment"
                     style={{width: "100%", marginBottom: "10px", height: "80px"}}
+                    onChange={(e) => {
+                        setPub(e.target.value);
+                        console.log(pub);
+                    }}
                 />
                 <button style={{width: "100%"}}>Post Public Comment</button>
                 <div style={{marginTop: "20px"}}>
