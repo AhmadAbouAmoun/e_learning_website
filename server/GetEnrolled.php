@@ -19,7 +19,7 @@ if (!verifyJWT($token, $secret)) {
 $user_id = getJWTValue($token, "user_id");
 
 $query = $connection->prepare("
-   SELECT * FROM enrolledcourses WHERE student_id=$user_id
+   SELECT * FROM enrolledcourses WHERE student_id=?
 ");
 if (!$query) {
     echo json_encode(["status" => "failed", "message" => "Query preparation failed", "error" => $connection->error]);
@@ -35,5 +35,5 @@ if ($result->num_rows > 0) {
     while ($course = $result->fetch_assoc()) {
         $courses[] = $course;
     }
-    echo json_encode(["status" => "success", "courses" => $courses]);
+    echo json_encode( $courses);
 } 

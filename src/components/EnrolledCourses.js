@@ -16,7 +16,7 @@ const EnrolledCourses = () => {
         .then((data) => {
             console.log(data);
             if (Array.isArray(data)) {
-                setCourses(data);
+                setCourses([...data]);
             } else {
                 console.error("Unexpected response format:", data);
             }
