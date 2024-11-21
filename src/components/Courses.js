@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import style from "../styles/course.module.css";
 const Course = () => {
+    console.log(style);
     const [courses, setData] = useState([]);
     useEffect(() => {
         fetch(`http://localhost/e-learning-website/server/GetCourses.php`, {method: "GET"})
@@ -56,9 +57,31 @@ const Course = () => {
     return (
         <div style={{padding: "20px"}}>
             {courses.map((course) => (
-                <div key={course.id} className={style.card}>
+                <div
+                    key={course.id}
+                    style={{
+                        border: "1px solid #ccc",
+                        borderRadius: "8px",
+                        padding: "16px",
+                        marginBottom: "12px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        backgroundColor: "#f9f9f9",
+                    }}
+                >
                     <h3 style={{margin: 0}}>{course.name}</h3>
-                    <button className={style.button} onClick={() => Enroll(course.id, course.name, course.teacher_id)}>
+                    <button
+                        style={{
+                            padding: "8px 16px",
+                            backgroundColor: "#007bff",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => Enroll(course.id, course.name, course.teacher_id)}
+                    >
                         Enroll Now
                     </button>
                 </div>
