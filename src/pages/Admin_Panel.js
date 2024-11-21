@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
 import classes from "../styles/tableDesgin.module.css";
 import Table from "../components/Table";
+import {useNavigate} from "react-router-dom";
 
 const AdminPanel = () => {
+    const navigate = useNavigate();
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [showCreateCourseForm, setShowCreateCourseForm] = useState(false);
     const [teacherData, setTeacherData] = useState({
@@ -44,7 +46,9 @@ const AdminPanel = () => {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            if (data.status === "failed") {
+                navigate("/homePage");
+            }
         })
         .catch((error) => {
             console.error("Error fetching data:", error);
