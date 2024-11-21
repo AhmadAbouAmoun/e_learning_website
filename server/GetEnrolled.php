@@ -1,6 +1,8 @@
 <?php
 
 include "connection.php";
+include "JWT.php";
+$input = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($input['token'])) {
     echo json_encode(["status" => "failed", "message" => "Token was not provided"]);
@@ -16,22 +18,22 @@ if (!verifyJWT($token, $secret)) {
 
 $user_id = getJWTValue($token, "user_id");
 
+$query = $connection->prepare("
+   SELECT * FROM enrolledcourses WHERE student_id=$user_id
+");
+if (!$query) {
+    echo json_encode(["status" => "failed", "message" => "Query preparation failed", "error" => $connection->error]);
+    return;
+}
 
-$query = $connection->prepare("SELECT * FROM courses WHERE student_id=? ");
-$query->bind_param("i",$user_id);
+$query->bind_param("i", $user_id);
 $query->execute();
-
 $result = $query->get_result();
 
 $courses = [];
 if ($result->num_rows > 0) {
     while ($course = $result->fetch_assoc()) {
-        $courses[] = $course; 
+        $courses[] = $course;
     }
-    echo json_encode($courses);
-} else {
-    echo json_encode([
-        "message" => "Not Found"
-    ]);
-}
-?>
+    echo json_encode(["status" => "success", "courses" => $courses]);
+} 

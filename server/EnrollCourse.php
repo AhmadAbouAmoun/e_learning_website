@@ -5,13 +5,14 @@ include "JWT.php";
 $input = json_decode(file_get_contents("php://input"), true);
 error_log(file_get_contents("php://input"));
 
-if (!isset($input['course_id'])) {
+if (!isset($input['course_id'])||!isset($input['course_name'])||!isset($input['teacher_id'])) {
     echo json_encode(["status" => "failed", "message" => "course_id is not set"]);
     return;
 }
 
 $course_id = $input["course_id"];
-
+$course_name=$input["course_name"];
+$teacher_id=$input['teacher_id'];
 if (!isset($input['token'])) {
     echo json_encode(["status" => "failed", "message" => "Token was not provided"]);
     return;
@@ -40,13 +41,13 @@ if ($result->num_rows > 0) {
     return;
 }
 
-$query = $connection->prepare("INSERT INTO enrolledcourses(student_id, course_id) VALUES (?, ?)");
+$query = $connection->prepare("INSERT INTO enrolledcourses(student_id, course_id,course_name,teacher_id) VALUES (?, ?,?,?)");
 if (!$query) {
     echo json_encode(["status" => "failed", "message" => "Query preparation failed", "error" => $connection->error]);
     return;
 }
 
-$query->bind_param("ii", $user_id, $course_id);
+$query->bind_param("iisi", $user_id, $course_id,$course_name,$teacher_id);
 if ($query->execute()) {
     echo json_encode(["status" => "success", "message" => "Successfully enrolled"]);
 } else {

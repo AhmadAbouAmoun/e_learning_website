@@ -13,7 +13,7 @@ const Course = () => {
         });
     }, []);
 
-    function Enroll(id) {
+    function Enroll(id, name, teacher_id) {
         const token = localStorage.getItem("token");
 
         if (!token) {
@@ -24,10 +24,12 @@ const Course = () => {
 
         fetch(`http://localhost/e-learning-website/server/EnrollCourse.php`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"}, // Fixed headers key
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-                course_id: id, // Ensure body is stringified
+                course_id: id,
                 token: token,
+                course_name: name,
+                teacher_id,
             }),
         })
         .then((response) => {
@@ -56,7 +58,7 @@ const Course = () => {
             {courses.map((course) => (
                 <div key={course.id} className={style.card}>
                     <h3 style={{margin: 0}}>{course.name}</h3>
-                    <button className={style.button} onClick={() => Enroll(course.id)}>
+                    <button className={style.button} onClick={() => Enroll(course.id, course.name, course.teacher_id)}>
                         Enroll Now
                     </button>
                 </div>

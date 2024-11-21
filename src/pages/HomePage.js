@@ -1,6 +1,7 @@
 import {useState} from "react";
 import Courses from "../components/Courses";
 import "../styles/navbar.css";
+import EnrolledCourses from "../components/EnrolledCourses";
 const HomePage = () => {
     const [page, setPage] = useState("Courses");
     return (
@@ -35,6 +36,7 @@ const HomePage = () => {
                 <span>Welcome</span>
             </nav>
             {page === "Courses" && <Courses />}
+            {page === "Enrolled" && <EnrolledCourses />}
         </div>
     );
 };
