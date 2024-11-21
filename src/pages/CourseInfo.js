@@ -11,7 +11,7 @@ const CourseInfo = () => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto"}}>
-            <CommentSection />
+            <CommentSection id={id} />
             <div style={{width: "75%", padding: "20px"}}>
                 <nav className="navbar">
                     <h3>Website Name</h3>

@@ -1,9 +1,30 @@
 import {useState} from "react";
 
-const CommentSection = () => {
+const CommentSection = ({id}) => {
     const [pub, setPub] = useState();
     const [pri, setPri] = useState();
+    const token = localStorage.getItem("token");
+    console.log(token);
 
+    function CreateComment(type, comment) {
+        fetch(`http://localhost/e-learning-website/server/SendComments.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                course_id: id,
+                token,
+                type,
+                comment,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
+    }
     return (
         <div style={{width: "20%", padding: "20px", borderRight: "2px solid #ccc", backgroundColor: "#f9f9f9"}}>
             <h3>Comments</h3>
@@ -33,7 +54,9 @@ const CommentSection = () => {
                         setPri(e.target.value);
                     }}
                 />
-                <button style={{width: "100%"}}>Post Private Comment</button>
+                <button style={{width: "100%"}} onClick={() => CreateComment("private", pri)}>
+                    Post Private Comment
+                </button>
                 <div style={{marginTop: "20px"}}>
                     <p>
                         <strong>John (Private):</strong> Can you help me with the last assignment?

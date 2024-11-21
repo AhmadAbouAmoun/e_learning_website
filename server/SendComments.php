@@ -1,18 +1,19 @@
 <?php
 include "connection.php";
 include "JWT.php";
+$input = json_decode(file_get_contents("php://input"), true);
 
-if(!$_POST["course_id"]||!$_POST["type"]||!$_POST["comment"]){
+if(!$input["course_id"]||!$input["type"]||!$input["comment"]){
     echo"something was not provided";
     return;
 }
-$course_id=$_POST["course_id"];
-$type=$_POST["type"];
-$comment=$_POST["comment"];
+$course_id=$input["course_id"];
+$type=$input["type"];
+$comment=$input["comment"];
 
 
-if (isset($_POST['token'])) {
-    $token = $_POST['token'];
+if (isset($input['token'])) {
+    $token = $input['token'];
     if(verifyJWT($token,$secret))
     {
         $user_id=getJWTValue($token,"user_id");
@@ -32,7 +33,7 @@ if (isset($_POST['token'])) {
                 "user_id"=>$user_id,
                 "status" => "success",
             ];            
-            echo json_encode(["message"=>"successfully inserted message","status"=>"success",$response]);
+            echo json_encode([$response]);
         }	
     }
     else{
