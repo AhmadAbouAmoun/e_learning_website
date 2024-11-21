@@ -1,7 +1,27 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Invitation = () => {
     const [invitation, setInvitation] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost/e-learning-website/server/GetInvitations.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (Array.isArray(data)) {
+                setInvitation(data);
+            } else {
+                console.error("Unexpected response format:", data);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+        });
+    }, []);
     return (
         <div style={{padding: "20px"}}>
             {invitation.map((course) => (
