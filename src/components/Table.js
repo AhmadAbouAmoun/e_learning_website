@@ -41,25 +41,27 @@ const Table = ({type, input}) => {
     };
     ///////
     const deleteCourse = (id) => {
-        fetch(`http://localhost/e-learning-website/server/DeleteCourse.php`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: id,
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            if (result.message) {
-                alert(result.message);
-                setData((prevData) => prevData.filter((course) => course.id !== id));
-            } else if (result.status === "failed") {
-                alert(result.message);
-            }
-        })
-        .catch((error) => {
-            console.error("Error deleting course:", error);
-        });
+        if (id) {
+            fetch(`http://localhost/e-learning-website/server/DeleteCourse.php`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({id}),
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.message) {
+                    alert(result.message);
+                    setData((prevData) => prevData.filter((course) => course.id !== id));
+                } else if (result.status === "failed") {
+                    alert(result.message);
+                }
+            })
+            .catch((error) => {
+                console.error("Error deleting course:", error);
+            });
+        }
     };
     //////////
     const deleteUser = (id) => {

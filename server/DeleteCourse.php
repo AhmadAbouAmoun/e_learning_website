@@ -4,12 +4,13 @@ include "connection.php";
 include "JWT.php";
 $input = json_decode(file_get_contents("php://input"), true);
 error_log(file_get_contents("php://input"));
+echo $input['id'];
 
     if(!isset($input['id'])){
         echo json_encode(["status"=>"failed","message"=>"id is not set"]);
         return;
     }
-    $id=$input['id'];
+    $id=(int)$input['id'];
 
     $query = $connection->prepare("DELETE  FROM courses WHERE id = ?");
     $query->bind_param('i', $id);
