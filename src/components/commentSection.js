@@ -15,7 +15,6 @@ const CommentSection = () => {
                     style={{width: "100%", marginBottom: "10px", height: "80px"}}
                     onChange={(e) => {
                         setPub(e.target.value);
-                        console.log(pub);
                     }}
                 />
                 <button style={{width: "100%"}}>Post Public Comment</button>
@@ -30,6 +29,9 @@ const CommentSection = () => {
                 <textarea
                     placeholder="Add a private comment"
                     style={{width: "100%", marginBottom: "10px", height: "80px"}}
+                    onChange={(e) => {
+                        setPri(e.target.value);
+                    }}
                 />
                 <button style={{width: "100%"}}>Post Private Comment</button>
                 <div style={{marginTop: "20px"}}>
