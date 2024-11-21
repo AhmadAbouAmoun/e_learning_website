@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const CommentSection = ({id}) => {
     const [pub, setPub] = useState();
@@ -8,6 +8,23 @@ const CommentSection = ({id}) => {
 
     const token = localStorage.getItem("token");
     console.log(token);
+
+    useEffect(() => {
+        fetch(`http://localhost/e-learning-website/server/GetPublicComments.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                course_id: id,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
+    }, []);
 
     function CreateComment(type, comment) {
         fetch(`http://localhost/e-learning-website/server/SendComments.php`, {

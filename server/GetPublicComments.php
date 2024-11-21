@@ -19,12 +19,12 @@ $query->execute();
 
 $result = $query->get_result();
 
-$users = [];
+$comments = [];
 if ($result->num_rows > 0) {
-    while ($user = $result->fetch_assoc()) {
-        $users[] = $user; 
+    while ($comment = $result->fetch_assoc()) {
+        $comments[] = $comment; 
     }
-    echo json_encode($users);
+    echo json_encode($comments);
 } else {
     echo json_encode([
         "message" => "Not Found"
