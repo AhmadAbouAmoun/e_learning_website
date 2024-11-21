@@ -62,6 +62,34 @@ const AdminPanel = () => {
         });
     };
 
+    const handleCourseFormSubmit = (e) => {
+        e.preventDefault();
+
+        fetch("http://localhost/e-learning-website/server/CreateCourse.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                name: courseData.name,
+                teacher_id: courseData.teacher_id,
+            }),
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.status === "success") {
+                alert("Course created successfully");
+                setShowCreateCourseForm(false);
+            } else {
+                alert(result.message || "Error creating course");
+            }
+        })
+        .catch((error) => {
+            console.error("Error creating course:", error);
+            alert("Error creating course");
+        });
+    };
+
     return (
         <main className={classes.dataPanel}>
             <h1>Data Panel</h1>
