@@ -31,7 +31,13 @@ const HomePage = () => {
                             >
                                 Enrolled Courses
                             </li>
-                            <li onClick={() => {}}>Invitations</li>
+                            <li
+                                onClick={() => {
+                                    navigate("Invitation");
+                                }}
+                            >
+                                Invitations
+                            </li>
                         </ul>
 
                         <span>Welcome</span>
@@ -43,6 +49,7 @@ const HomePage = () => {
                 <Route path="Enrolled/*" element={<EnrolledCourses />}>
                     <Route path="course-info/:id" element={<CourseInfo />} />
                 </Route>
+                <Route path="Invitation" element={<Courses />} />
             </Routes>
         </>
     );
