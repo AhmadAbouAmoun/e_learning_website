@@ -5,14 +5,14 @@ include "JWT.php";
 $input = json_decode(file_get_contents("php://input"), true);
 error_log(file_get_contents("php://input"));
 
-if ( !isset($input["course_id"]) || !isset($input["message"])|| !isset($input["student_id"]) ) {
+if ( !isset($input["course_id"]) || !isset($input["student_id"]) ) {
     echo$input["course_id"];
     echo $input["message"];
     echo json_encode(["status" => "failed", "message" => "Missing required fields"]);
     exit;
 }
 
-$message = $input["message"];
+$message = "You were invited to this course";
 $course_id = $input["course_id"];
 $student_id = $input["student_id"];
 

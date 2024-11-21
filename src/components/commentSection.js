@@ -81,6 +81,24 @@ const CommentSection = ({id}) => {
             console.error("Error posting comment:", error);
         });
     }
+    function CreateInvitation() {
+        fetch(`http://localhost/e-learning-website/server/CreateInvitation.php`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                course_id: id,
+                token,
+                invitation,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
+    }
     return (
         <div style={{width: "20%", padding: "20px", borderRight: "2px solid #ccc", backgroundColor: "#f9f9f9"}}>
             <h3>Comments</h3>
@@ -136,10 +154,12 @@ const CommentSection = ({id}) => {
                 style={{width: "100%", marginBottom: "10px", height: "80px"}}
                 onChange={(e) => {
                     setInvitation(e.target.value);
-                    console.log(invitation);
+                }}
+                onClick={() => {
+                    CreateInvitation();
                 }}
             />
-            <button style={{width: "100%"}}>Post Announcment\</button>
+            <button style={{width: "100%"}}>Generate Invitation\</button>
         </div>
     );
 };
