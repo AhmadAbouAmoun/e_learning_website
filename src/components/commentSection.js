@@ -7,7 +7,6 @@ const CommentSection = ({id}) => {
     const [priComments, setPriComments] = useState([]);
 
     const token = localStorage.getItem("token");
-    console.log(token);
 
     useEffect(() => {
         fetch(`http://localhost/e-learning-website/server/GetPublicComments.php`, {
@@ -19,7 +18,10 @@ const CommentSection = ({id}) => {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            if (Array.isArray(data)) {
+                setPubComments((pubComments) => (pubComments = data));
+                console.log(pubComments);
+            }
         })
         .catch((error) => {
             console.error("Error posting comment:", error);
@@ -62,9 +64,11 @@ const CommentSection = ({id}) => {
                     Post Public Comment
                 </button>
                 <div style={{marginTop: "20px"}}>
-                    <p>
-                        <strong>John:</strong> Hello world
-                    </p>
+                    {pubComments.map((comment) => (
+                        <p>
+                            student number {comment.student_id}:{comment.comment}
+                        </p>
+                    ))}
                 </div>
             </div>
             <h3>Private Comments</h3>
