@@ -99,9 +99,7 @@ const CommentSection = ({id}) => {
                     Post Private Comment
                 </button>
                 <div style={{marginTop: "20px"}}>
-                    <p>
-                        <strong>John (Private):</strong> Can you help me with the last assignment?
-                    </p>
+                    <p></p>
                 </div>
             </div>
         </div>
