@@ -117,6 +117,46 @@ const AdminPanel = () => {
             )}
 
             <Table type="Courses" />
+
+            <button onClick={() => setShowCreateCourseForm(true)}>Create Course</button>
+
+            {showCreateCourseForm && (
+                <div className={classes.createForm}>
+                    <h2>Create New Course</h2>
+                    <form onSubmit={handleCourseFormSubmit}>
+                        <div className={classes.formGroup}>
+                            <label htmlFor="courseName">Course Name</label>
+                            <input
+                                type="text"
+                                id="courseName"
+                                name="name"
+                                value={courseData.name}
+                                onChange={handleCourseInputChange}
+                                required
+                            />
+                        </div>
+                        <div className={classes.formGroup}>
+                            <label htmlFor="teacherId">Teacher ID</label>
+                            <input
+                                type="text"
+                                id="teacherId"
+                                name="teacher_id"
+                                value={courseData.teacher_id}
+                                onChange={handleCourseInputChange}
+                                required
+                            />
+                        </div>
+                        <button type="submit">Create Course</button>
+                        <button
+                            type="button"
+                            onClick={() => setShowCreateCourseForm(false)}
+                            className={classes.cancelButton}
+                        >
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            )}
         </main>
     );
 };
