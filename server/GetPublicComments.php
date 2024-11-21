@@ -14,8 +14,8 @@ $course_id=$input["course_id"];
 $type="public";
 
 
-$query = $connection->prepare("SELECT * FROM comments WHERE type=?");
-$query->bind_param("s",$type);
+$query = $connection->prepare("SELECT * FROM comments WHERE type=? AND course_id=?");
+$query->bind_param("si",$type,$course_id);
 $query->execute();
 
 $result = $query->get_result();

@@ -21,7 +21,6 @@ const CommentSection = ({id}) => {
         .then((data) => {
             if (Array.isArray(data)) {
                 setPubComments((pubComments) => (pubComments = data));
-                console.log(pubComments);
             }
         })
         .catch((error) => {
