@@ -129,9 +129,17 @@ const CommentSection = ({id}) => {
                 }}
             />
             <button style={{width: "100%"}} onClick={() => CreateAnnouncment()}>
-                {" "}
-                Post Announcment{" "}
+                Post Announcment\
             </button>
+            <textarea
+                placeholder="Send an invitation"
+                style={{width: "100%", marginBottom: "10px", height: "80px"}}
+                onChange={(e) => {
+                    setInvitation(e.target.value);
+                    console.log(invitation);
+                }}
+            />
+            <button style={{width: "100%"}}>Post Announcment\</button>
         </div>
     );
 };
