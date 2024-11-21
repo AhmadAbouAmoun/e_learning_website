@@ -4,13 +4,20 @@ import Table from "../components/Table";
 
 const AdminPanel = () => {
     const [showCreateForm, setShowCreateForm] = useState(false);
+    const [showCreateCourseForm, setShowCreateCourseForm] = useState(false);
+
     const [teacherData, setTeacherData] = useState({
         name: "",
         email: "",
         password: "",
     });
 
-    const handleInputChange = (e) => {
+    const [courseData, setCourseData] = useState({
+        name: "",
+        teacher_id: "",
+    });
+
+    const handleTeacherInputChange = (e) => {
         const {name, value} = e.target;
         setTeacherData((prevData) => ({
             ...prevData,
@@ -18,7 +25,15 @@ const AdminPanel = () => {
         }));
     };
 
-    const handleFormSubmit = (e) => {
+    const handleCourseInputChange = (e) => {
+        const {name, value} = e.target;
+        setCourseData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleTeacherFormSubmit = (e) => {
         e.preventDefault();
 
         fetch("http://localhost/e-learning-website/server/CreateInstructor.php", {
@@ -59,37 +74,37 @@ const AdminPanel = () => {
             {showCreateForm && (
                 <div className={classes.createForm}>
                     <h2>Create New Teacher</h2>
-                    <form onSubmit={handleFormSubmit}>
+                    <form onSubmit={handleTeacherFormSubmit}>
                         <div className={classes.formGroup}>
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="teacherName">Name</label>
                             <input
                                 type="text"
-                                id="name"
+                                id="teacherName"
                                 name="name"
                                 value={teacherData.name}
-                                onChange={handleInputChange}
+                                onChange={handleTeacherInputChange}
                                 required
                             />
                         </div>
                         <div className={classes.formGroup}>
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="teacherEmail">Email</label>
                             <input
                                 type="email"
-                                id="email"
+                                id="teacherEmail"
                                 name="email"
                                 value={teacherData.email}
-                                onChange={handleInputChange}
+                                onChange={handleTeacherInputChange}
                                 required
                             />
                         </div>
                         <div className={classes.formGroup}>
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="teacherPassword">Password</label>
                             <input
                                 type="password"
-                                id="password"
+                                id="teacherPassword"
                                 name="password"
                                 value={teacherData.password}
-                                onChange={handleInputChange}
+                                onChange={handleTeacherInputChange}
                                 required
                             />
                         </div>
